@@ -16,7 +16,7 @@ from __future__ import annotations
 import json
 import re
 
-from inspect_ai.model import Model, get_model
+from inspect_ai.model import GenerateConfig, Model, get_model
 from inspect_ai.scorer import Score, Scorer, Target, mean, scorer, stderr
 from inspect_ai.solver import TaskState
 from pydantic import ValidationError
@@ -81,7 +81,7 @@ def structure_valid() -> Scorer:
                 3 <= len(listing.highlights) <= 5
                 and all(h.strip() for h in listing.highlights)
             ),
-            "about section 40-200 words": 40 <= words <= 200,
+            "about section 60-140 words": 60 <= words <= 140,
             "no HTML in output": not re.search(r"<[^>]+>", text),
             "amenity descriptions present iff amenities exist": (
                 bool(listing.amenity_descriptions) == bool(prop.amenities)
@@ -183,6 +183,12 @@ def forbidden_claims() -> Scorer:
     These are unverified claims planted in the owner's marketing text
     (e.g. 'beachfront' with no such amenity). Vacuously 1.0 for fixtures
     with no forbidden claims.
+
+    Matching is plain substring, so fixture phrases must be POSITIVE
+    ASSERTIONS ("beachfront", "free wifi") rather than bare nouns ("beach",
+    "wifi"): verified review text may legitimately contain the bare noun
+    ("nowhere near a beach"), and honest copy paraphrasing that review must
+    not be scored as a leak.
     """
 
     async def score(state: TaskState, target: Target) -> Score:
@@ -204,6 +210,49 @@ def forbidden_claims() -> Scorer:
 
 
 # ---------------------------------------------------- model-graded scorers
+
+# Judges run at temperature 0 to minimize grading variance between runs.
+_JUDGE_CONFIG = GenerateConfig(temperature=0.0)
+
+
+def _parse_judge_claims(completion: str) -> list[dict] | None:
+    """Claims list from the groundedness judge, tolerating malformed JSON.
+
+    Judges occasionally emit JSON broken by unescaped quotes inside string
+    values; the verdicts are still recoverable by pattern, so a judge
+    formatting slip must not read as a 0.0 content failure.
+    """
+    try:
+        claims = extract_json(completion)["claims"]
+        if isinstance(claims, list):
+            return claims
+    except (ValueError, KeyError, TypeError):
+        pass
+    verdicts = re.findall(r'"verdict"\s*:\s*"(supported|unsupported)"', completion)
+    if verdicts:
+        return [
+            {"claim": "(text unrecoverable from malformed judge JSON)", "verdict": v}
+            for v in verdicts
+        ]
+    return None
+
+
+def _parse_judge_ratings(completion: str) -> tuple[dict[str, int] | None, str]:
+    """Rubric ratings from the quality judge, tolerating malformed JSON."""
+    try:
+        grades = extract_json(completion)
+        return {d: int(grades[d]) for d in _QUALITY_DIMS}, str(grades.get("comment", ""))
+    except (ValueError, KeyError, TypeError):
+        pass
+    found = dict(
+        re.findall(r'"(specificity|tone|clarity|cliche_avoidance)"\s*:\s*(\d)', completion)
+    )
+    if set(found) == set(_QUALITY_DIMS):
+        return (
+            {d: int(found[d]) for d in _QUALITY_DIMS},
+            "(ratings recovered from malformed judge JSON)",
+        )
+    return None, ""
 
 GROUNDEDNESS_TEMPLATE = """\
 You are auditing marketing copy for a vacation rental against its source data.
@@ -249,10 +298,9 @@ def claim_groundedness(model: str | Model | None = None) -> Scorer:
             property_json=json.dumps(state.metadata["property"], indent=2),
             copy=listing_text(listing),
         )
-        result = await judge.generate(prompt)
-        try:
-            claims = extract_json(result.completion)["claims"]
-        except (ValueError, KeyError):
+        result = await judge.generate(prompt, config=_JUDGE_CONFIG)
+        claims = _parse_judge_claims(result.completion)
+        if claims is None:
             return Score(value=0.0, explanation=f"judge output unparseable: {result.completion[:200]}")
         if not claims:
             return Score(value=1.0, explanation="judge found no factual claims")
@@ -308,17 +356,15 @@ def copy_quality(model: str | Model | None = None) -> Scorer:
             property_json=json.dumps(state.metadata["property"], indent=2),
             copy=listing_text(listing),
         )
-        result = await judge.generate(prompt)
-        try:
-            grades = extract_json(result.completion)
-            ratings = {d: int(grades[d]) for d in _QUALITY_DIMS}
-        except (ValueError, KeyError, TypeError):
+        result = await judge.generate(prompt, config=_JUDGE_CONFIG)
+        ratings, comment = _parse_judge_ratings(result.completion)
+        if ratings is None:
             return Score(value=0.0, explanation=f"judge output unparseable: {result.completion[:200]}")
         value = sum(ratings.values()) / (5 * len(ratings))
         detail = ", ".join(f"{d}={v}" for d, v in ratings.items())
         return Score(
             value=value,
-            explanation=f"{detail}. {grades.get('comment', '')}",
+            explanation=f"{detail}. {comment}",
             metadata={"ratings": ratings},
         )
 

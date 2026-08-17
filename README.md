@@ -64,12 +64,15 @@ Judge scorers take an injectable model, tested offline with `mockllm` and canned
 ## Reading the eval logs
 
 Committed logs are the evidence trail of the eval-driven loop (v1 smoke → prompt fix →
-v2 → scorer fix → v3 final; the story with numbers is in notebook §7):
+v2 → scorer fix → v3 → eval-suite hardening → v4 final; the story with numbers is in
+notebook §7):
 
 ```
 logs/smoke/…WZAi7….eval   # v1 baseline (2 samples): groundedness 0.78, owner-text leaks
 logs/…UHYAfL5….eval       # v2 full run: groundedness 0.96, numeric-scorer false positive found
-logs/…kNwBdn….eval        # v3 final: deterministic scorers 1.00, groundedness 0.96, quality 0.85
+logs/…kNwBdn….eval        # v3: deterministic scorers 1.00, groundedness 0.96, quality 0.85
+logs/…2GcQqu….eval        # v4a: exposed judge-JSON fragility (a 0.00 false failure)
+logs/…Cyvvpu….eval        # v4 final: deterministic 1.00, groundedness 0.96, quality 0.86
 ```
 
 Browse them interactively:
@@ -93,7 +96,7 @@ src/listing_gen/
   generator.py               # LLMClient protocol, Inspect/stub clients, ListingGenerator
   evals/                     # dataset, solver, scorers, task
 fixtures/                    # property fixtures + eval expectations
-tests/                       # 32 offline tests
+tests/                       # 36 offline tests
 logs/                        # committed inspect-ai run logs
 ```
 

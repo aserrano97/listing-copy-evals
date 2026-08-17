@@ -55,6 +55,15 @@ async def test_structure_valid_catches_violations(good_listing, villa_raw) -> No
 
 
 @pytest.mark.asyncio
+async def test_structure_valid_enforces_prompt_word_bounds(good_listing, villa_raw) -> None:
+    # the prompt contract says 60-140 words; the scorer must enforce exactly that
+    for words, ok in [(59, False), (60, True), (140, True), (141, False)]:
+        sized = good_listing.model_copy(update={"about_this_place": "word " * words})
+        score = await structure_valid()(make_state(sized.model_dump_json(), villa_raw), TARGET)
+        assert (score.value == 1.0) == ok, f"{words} words should {'pass' if ok else 'fail'}"
+
+
+@pytest.mark.asyncio
 async def test_structure_valid_zero_on_unparseable(villa_raw) -> None:
     score = await structure_valid()(make_state("not json", villa_raw), TARGET)
     assert score.value == 0.0
@@ -136,6 +145,21 @@ async def test_forbidden_claims_catches_leak(good_listing, villa_raw) -> None:
     assert "beach" in score.explanation
 
 
+@pytest.mark.asyncio
+async def test_forbidden_claims_positive_assertions_spare_honest_paraphrase(
+    good_listing, villa_raw
+) -> None:
+    # fixture phrases are positive assertions, so copy that honestly relays a
+    # verified review ("not near a beach") must not be scored as a leak
+    honest = good_listing.model_copy(
+        update={"about_this_place": "One guest notes it is nowhere near a beach. " * 15}
+    )
+    state = make_state(
+        honest.model_dump_json(), villa_raw, forbidden_claims=["beachfront", "beach access"]
+    )
+    assert (await forbidden_claims()(state, TARGET)).value == 1.0
+
+
 # ---------------------------------------------------------------- judges
 
 
@@ -173,6 +197,35 @@ async def test_copy_quality_averages_rubric(good_listing, villa_raw) -> None:
     score = await scorer_fn(make_state(good_listing.model_dump_json(), villa_raw), TARGET)
     assert score.value == pytest.approx(18 / 20)
     assert score.metadata["ratings"]["tone"] == 4
+
+
+@pytest.mark.asyncio
+async def test_copy_quality_recovers_ratings_from_malformed_judge_json(
+    good_listing, villa_raw
+) -> None:
+    # real failure observed in a live run: unescaped quotes inside the comment
+    # break json.loads, but the integer ratings are still recoverable
+    malformed = (
+        '{"specificity": 3, "tone": 4, "clarity": 4, "cliche_avoidance": 4, '
+        '"comment": "calls it both a "studio" and "1-bedroom", a contradiction"}'
+    )
+    scorer_fn = copy_quality(model=mock_judge(malformed))
+    score = await scorer_fn(make_state(good_listing.model_dump_json(), villa_raw), TARGET)
+    assert score.value == pytest.approx(15 / 20)
+    assert "recovered" in score.explanation
+
+
+@pytest.mark.asyncio
+async def test_claim_groundedness_recovers_verdicts_from_malformed_judge_json(
+    good_listing, villa_raw
+) -> None:
+    malformed = (
+        '{"claims": [{"claim": "has a "studio" layout", "verdict": "unsupported", "evidence": "x"}, '
+        '{"claim": "sleeps 6", "verdict": "supported", "evidence": "rental_info"}]}'
+    )
+    scorer_fn = claim_groundedness(model=mock_judge(malformed))
+    score = await scorer_fn(make_state(good_listing.model_dump_json(), villa_raw), TARGET)
+    assert score.value == pytest.approx(1 / 2)
 
 
 @pytest.mark.asyncio

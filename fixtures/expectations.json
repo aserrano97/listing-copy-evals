@@ -1,8 +1,26 @@
 {
   "104": {
-    "forbidden_claims": ["beach", "pool", "sea view", "ocean", "waves"]
+    "forbidden_claims": [
+      "beachfront",
+      "beach access",
+      "steps from the beach",
+      "near the beach",
+      "walk to the beach",
+      "pool",
+      "sea view",
+      "ocean",
+      "waves"
+    ]
   },
   "105": {
-    "forbidden_claims": ["wifi", "wi-fi", "internet"]
+    "forbidden_claims": [
+      "free wifi",
+      "fast wifi",
+      "wifi included",
+      "wifi throughout",
+      "internet included",
+      "internet access",
+      "broadband"
+    ]
   }
 }
