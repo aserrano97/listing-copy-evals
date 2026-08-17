@@ -1,0 +1,8 @@
+{
+  "104": {
+    "forbidden_claims": ["beach", "pool", "sea view", "ocean", "waves"]
+  },
+  "105": {
+    "forbidden_claims": ["wifi", "wi-fi", "internet"]
+  }
+}

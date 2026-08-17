@@ -1,0 +1,49 @@
+{
+  "property_id": 107,
+  "property_name": "Ático Mirador del Albaicín",
+  "property_type": "NormalApartment",
+  "description": {
+    "name": "Ático Mirador del Albaicín",
+    "headline": "Ático con terraza y vistas a la Alhambra",
+    "description": "Ático reformado en pleno Albaicín, con una terraza privada orientada a la Alhambra. Suelos hidráulicos originales, mucha luz y el ambiente del barrio: cármenes, teterías y miradores a un paso."
+  },
+  "amenities": [
+    "BalconyTerrace",
+    "AirConditioning",
+    "InternetBroadband",
+    "KitchenFullyEquipped",
+    "WashingMachine",
+    "TowelsAndLinen"
+  ],
+  "image_urls": [
+    "https://cdn.example.com/aticos/107/terraza.jpg",
+    "https://cdn.example.com/aticos/107/salon.jpg"
+  ],
+  "reviews": [
+    "La terraza al atardecer, con la Alhambra iluminada, no tiene precio. El piso es pequeño pero está impecable.",
+    "Perfect location in the Albaicín, the terrace view of the Alhambra is unreal. Lots of stairs to get there, worth it.",
+    "Muy cómodo y limpio, el aire acondicionado se agradece en agosto."
+  ],
+  "num_of_reviews": 31,
+  "average_review_score": 4.9,
+  "rental_info": {
+    "max_guests": 3,
+    "bedrooms": 1,
+    "bathrooms": 1
+  },
+  "location": {
+    "city": "Granada",
+    "country": "Spain",
+    "latitude": 37.181,
+    "longitude": -3.5922
+  },
+  "policies": {
+    "cancellation_policy": "Free cancellation up to 10 days before check-in",
+    "payment_schedule": "Full payment at booking",
+    "damage_deposit": "150 EUR refundable damage deposit"
+  },
+  "house_rules": {
+    "check_in_time": "3 PM",
+    "check_out_time": "11 AM"
+  }
+}

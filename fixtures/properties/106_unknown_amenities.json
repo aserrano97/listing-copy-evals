@@ -1,0 +1,49 @@
+{
+  "property_id": 106,
+  "property_name": "Aurora Cabin",
+  "property_type": "Cottage",
+  "description": {
+    "name": "Aurora Cabin",
+    "headline": "Modern cabin under northern skies",
+    "description": "A modern timber cabin outside Rovaniemi, built for winter: floor heating throughout, a private sauna, and a covered charging spot for electric cars. Big windows face north for aurora watching."
+  },
+  "amenities": [
+    "SaunaPrivate",
+    "EvCharger",
+    "HeatedFloors",
+    "GameConsolePs5",
+    "KitchenFullyEquipped",
+    "InternetBroadband",
+    "FreeParking"
+  ],
+  "image_urls": [
+    "https://cdn.example.com/cabins/106/exterior.jpg",
+    "https://cdn.example.com/cabins/106/sauna.jpg"
+  ],
+  "reviews": [
+    "The sauna after a day in the snow was unbeatable. Cabin was warm and spotless.",
+    "EV charging on site made our winter road trip easy. Kids loved the PlayStation."
+  ],
+  "num_of_reviews": 18,
+  "average_review_score": 4.8,
+  "rental_info": {
+    "max_guests": 5,
+    "bedrooms": 2,
+    "bathrooms": 1
+  },
+  "location": {
+    "city": "Rovaniemi",
+    "country": "Finland",
+    "latitude": 66.5039,
+    "longitude": 25.7294
+  },
+  "policies": {
+    "cancellation_policy": "Free cancellation up to 21 days before check-in",
+    "payment_schedule": "25% deposit at booking, balance due 30 days before arrival",
+    "damage_deposit": null
+  },
+  "house_rules": {
+    "check_in_time": "4 PM",
+    "check_out_time": "11 AM"
+  }
+}

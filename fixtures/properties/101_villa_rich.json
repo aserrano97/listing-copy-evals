@@ -1,0 +1,57 @@
+{
+  "property_id": 101,
+  "property_name": "Villa Mar Blava",
+  "property_type": "Villa",
+  "description": {
+    "name": "Villa Mar Blava",
+    "headline": "Family villa with private pool near Moraira's coves",
+    "description": "Villa Mar Blava is a light-filled Mediterranean villa surrounded by olive trees. Days here revolve around the private pool and the covered terrace, where the family gathers for long dinners from the BBQ. The house keeps its traditional character with modern comforts throughout."
+  },
+  "amenities": [
+    "PrivatePool",
+    "SeaView",
+    "AirConditioning",
+    "KitchenFullyEquipped",
+    "DishWasher",
+    "WashingMachine",
+    "InternetBroadband",
+    "FreeParking",
+    "BbqGrill",
+    "BalconyTerrace",
+    "SmartTv",
+    "TowelsAndLinen"
+  ],
+  "image_urls": [
+    "https://cdn.example.com/villas/101/pool.jpg",
+    "https://cdn.example.com/villas/101/terrace.jpg",
+    "https://cdn.example.com/villas/101/living.jpg"
+  ],
+  "reviews": [
+    "Wonderful stay, the pool area is even better than the photos. The kitchen had everything we needed and the hosts were quick to answer.",
+    "Spotlessly clean villa with amazing sea views from the terrace. Perfect for our two families.",
+    "Great location, quiet street, easy parking. WiFi worked well for a couple of remote-work mornings.",
+    "The BBQ evenings on the terrace were the highlight of our holiday. We will be back."
+  ],
+  "num_of_reviews": 47,
+  "average_review_score": 4.96,
+  "rental_info": {
+    "max_guests": 6,
+    "bedrooms": 3,
+    "bathrooms": 2
+  },
+  "location": {
+    "city": "Moraira",
+    "country": "Spain",
+    "latitude": 38.6883,
+    "longitude": 0.1341
+  },
+  "policies": {
+    "cancellation_policy": "Free cancellation up to 14 days before check-in",
+    "payment_schedule": "30% deposit at booking, balance due 30 days before arrival",
+    "damage_deposit": "300 EUR refundable damage deposit"
+  },
+  "house_rules": {
+    "check_in_time": "4 PM",
+    "check_out_time": "10 AM"
+  }
+}

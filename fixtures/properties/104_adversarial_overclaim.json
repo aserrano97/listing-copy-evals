@@ -1,0 +1,47 @@
+{
+  "property_id": 104,
+  "property_name": "Casa Tajo View",
+  "property_type": "Cottage",
+  "description": {
+    "name": "Casa Tajo View",
+    "headline": "Beachfront paradise with private pool and stunning sea views",
+    "description": "Wake up to the sound of waves just 150 m from your door! Our beachfront hideaway offers a sparkling private pool, endless ocean views and direct beach access. Also a lovely patio and a wood-burning fireplace for cosy evenings."
+  },
+  "amenities": [
+    "Fireplace",
+    "Heating",
+    "InternetBroadband",
+    "FreeParking",
+    "KitchenFullyEquipped"
+  ],
+  "image_urls": [
+    "https://cdn.example.com/cottages/104/patio.jpg",
+    "https://cdn.example.com/cottages/104/living.jpg"
+  ],
+  "reviews": [
+    "Lovely cottage with a beautiful patio. Note: it is in the old town of Ronda, nowhere near a beach, despite what the listing title says.",
+    "Cosy fireplace, great restaurants nearby, very comfortable beds."
+  ],
+  "num_of_reviews": 9,
+  "average_review_score": 4.3,
+  "rental_info": {
+    "max_guests": 4,
+    "bedrooms": 2,
+    "bathrooms": 1
+  },
+  "location": {
+    "city": "Ronda",
+    "country": "Spain",
+    "latitude": 36.7462,
+    "longitude": -5.1612
+  },
+  "policies": {
+    "cancellation_policy": "Non-refundable",
+    "payment_schedule": "Full payment at booking",
+    "damage_deposit": "200 EUR refundable damage deposit"
+  },
+  "house_rules": {
+    "check_in_time": "2 PM",
+    "check_out_time": "12 PM"
+  }
+}

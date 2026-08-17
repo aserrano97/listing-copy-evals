@@ -1,0 +1,47 @@
+{
+  "property_id": 103,
+  "property_name": "Loft Canal Vista",
+  "property_type": "NormalApartment",
+  "description": {
+    "name": "Loft Canal Vista",
+    "headline": "<b>Stylish canal-side loft</b> in the Jordaan",
+    "description": "<p>Welcome to our <strong>bright loft</strong> overlooking the canal!</p><br/><ul><li>Open-plan living space with high ceilings</li><li>Design furniture &amp; original wooden beams</li><li>Quiet courtyard at the back</li></ul><p>The loft is on the <em>second floor</em> of a classic canal house &mdash; stairs are steep, as is typical in Amsterdam.</p>"
+  },
+  "amenities": [
+    "InternetBroadband",
+    "Heating",
+    "CoffeeMachine",
+    "SmartTv",
+    "KitchenFullyEquipped"
+  ],
+  "image_urls": [
+    "https://cdn.example.com/lofts/103/canal.jpg",
+    "https://cdn.example.com/lofts/103/interior.jpg"
+  ],
+  "reviews": [
+    "Beautiful loft, the canal view from the sofa is fantastic. Note the stairs are really steep!",
+    "Great coffee machine, fast WiFi, and a location you cannot beat."
+  ],
+  "num_of_reviews": 23,
+  "average_review_score": 4.7,
+  "rental_info": {
+    "max_guests": 3,
+    "bedrooms": 1,
+    "bathrooms": 1
+  },
+  "location": {
+    "city": "Amsterdam",
+    "country": "Netherlands",
+    "latitude": 52.3745,
+    "longitude": 4.8823
+  },
+  "policies": {
+    "cancellation_policy": "Free cancellation up to 7 days before check-in",
+    "payment_schedule": "Full payment at booking",
+    "damage_deposit": null
+  },
+  "house_rules": {
+    "check_in_time": "3 PM",
+    "check_out_time": "11 AM"
+  }
+}

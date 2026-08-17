@@ -1,0 +1,40 @@
+{
+  "property_id": 102,
+  "property_name": "City Centre Studio",
+  "property_type": "NormalApartment",
+  "description": {
+    "name": "City Centre Studio",
+    "headline": "",
+    "description": "Small studio in the centre."
+  },
+  "amenities": [
+    "Heating",
+    "InternetBroadband"
+  ],
+  "image_urls": [
+    "https://cdn.example.com/apartments/102/main.jpg"
+  ],
+  "reviews": [],
+  "num_of_reviews": 0,
+  "average_review_score": null,
+  "rental_info": {
+    "max_guests": 2,
+    "bedrooms": 1,
+    "bathrooms": 1
+  },
+  "location": {
+    "city": "Porto",
+    "country": "Portugal",
+    "latitude": 41.1496,
+    "longitude": -8.611
+  },
+  "policies": {
+    "cancellation_policy": null,
+    "payment_schedule": null,
+    "damage_deposit": null
+  },
+  "house_rules": {
+    "check_in_time": "3 PM",
+    "check_out_time": "11 AM"
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "property_id": 105,
+  "property_name": "Fell Foot Cottage",
+  "property_type": "Cottage",
+  "description": {
+    "name": "Fell Foot Cottage",
+    "headline": "Traditional stone cottage at the foot of the fells",
+    "description": "A 19th-century stone cottage on the edge of the village, with low beams, a log burner and a small enclosed garden. Walkers and dog owners love the direct access to the fell paths."
+  },
+  "amenities": [
+    "Fireplace",
+    "Heating",
+    "PetsAllowed",
+    "KitchenFullyEquipped",
+    "WashingMachine",
+    "FreeParking",
+    "GardenView"
+  ],
+  "image_urls": [
+    "https://cdn.example.com/cottages/105/exterior.jpg",
+    "https://cdn.example.com/cottages/105/garden.jpg"
+  ],
+  "reviews": [
+    "Charming cottage, perfect base for walking. The log burner made the evenings special.",
+    "Lovely garden and our dog was very welcome. Kitchen a bit dated but had everything.",
+    "The cottage is cosy but the WiFi listing is misleading - there is no internet, and the water pressure upstairs was poor.",
+    "Good value, great walks from the door. Bring warm clothes, the heating struggles a little in winter."
+  ],
+  "num_of_reviews": 12,
+  "average_review_score": 3.9,
+  "rental_info": {
+    "max_guests": 4,
+    "bedrooms": 2,
+    "bathrooms": 1
+  },
+  "location": {
+    "city": "Ambleside",
+    "country": "United Kingdom",
+    "latitude": 54.4287,
+    "longitude": -2.9613
+  },
+  "policies": {
+    "cancellation_policy": "Free cancellation up to 30 days before check-in",
+    "payment_schedule": "50% deposit at booking, balance due 60 days before arrival",
+    "damage_deposit": null
+  },
+  "house_rules": {
+    "check_in_time": "4 PM",
+    "check_out_time": "10 AM"
+  }
+}
